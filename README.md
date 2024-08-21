@@ -6,3 +6,88 @@ to install the GOCD we need to check the java version if we are instlling it via
 
 we are installing using ZIP so we have to make sure the java version is compatible with the GOCD server agent.
 
+so basically we got an error saying that the space is not suffiecent in GOCD application. 
+
+but the allocated size is 20 GB with additional 10GB. but heres the catch.
+
+Linux divide the disk space as below. (lsblk)
+
+NAME                 MAJ:MIN   RM  SIZE RO TYPE MOUNTPOINTS
+xvda                 202:0      0   20G  0 disk
+├─xvda1              202:1      0    1M  0 part
+├─xvda2              202:2      0  122M  0 part /boot/efi
+├─xvda3              202:3      0  488M  0 part /boot
+└─xvda4              202:4      0 19.4G  0 part
+  ├─RootVG-rootVol   253:0      0    6G  0 lvm  /
+  ├─RootVG-swapVol   253:1      0    2G  0 lvm  [SWAP]
+  ├─RootVG-homeVol   253:2      0    1G  0 lvm  /home
+  ├─RootVG-varVol    253:3      0    2G  0 lvm  /var
+  ├─RootVG-varTmpVol 253:4      0    2G  0 lvm  /var/tmp
+  ├─RootVG-logVol    253:5      0    2G  0 lvm  /var/log
+  └─RootVG-auditVol  253:6      0  4.4G  0 lvm  /var/log/audit
+xvdbb                202:13568  0   10G  0 disk
+
+here if we observer /home where the gocd is installed have only 960MB allocated to it as per the below.
+
+df -Th
+Filesystem                   Type      Size  Used Avail Use% Mounted on
+devtmpfs                     devtmpfs  4.0M     0  4.0M   0% /dev
+tmpfs                        tmpfs     377M     0  377M   0% /dev/shm
+tmpfs                        tmpfs     151M  2.5M  149M   2% /run
+/dev/mapper/RootVG-rootVol   xfs       6.0G  2.3G  3.8G  38% /
+tmpfs                        tmpfs     377M     0  377M   0% /tmp
+/dev/mapper/RootVG-homeVol   xfs       960M  520M  441M  55% /home
+/dev/mapper/RootVG-varVol    xfs       2.0G  369M  1.6G  19% /var
+/dev/mapper/RootVG-logVol    xfs       2.0G   74M  1.9G   4% /var/log
+/dev/mapper/RootVG-varTmpVol xfs       2.0G   47M  1.9G   3% /var/tmp
+/dev/xvda3                   xfs       424M  223M  202M  53% /boot
+/dev/mapper/RootVG-auditVol  xfs       4.4G   64M  4.3G   2% /var/log/audit
+/dev/xvda2                   vfat      122M  7.0M  115M   6% /boot/efi
+tmpfs                        tmpfs      76M     0   76M   0% /run/user/1001
+
+so we should always make sure to check the size of the directory when installing a package.
+if the size is not suffiecient then we need to increase it.
+
+so basically. filesystems concept is followed in linux.
+
+so in video the VM is provisioned with 30GB volume and by following the below commands we have increased the 6GB of disk space.
+
+ lsblk
+NAME                 MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+xvda                 202:0    0   20G  0 disk
+├─xvda1              202:1    0    1M  0 part
+├─xvda2              202:2    0  122M  0 part /boot/efi
+├─xvda3              202:3    0  488M  0 part /boot
+└─xvda4              202:4    0 19.4G  0 part
+  ├─RootVG-rootVol   253:0    0    6G  0 lvm  /
+  ├─RootVG-swapVol   253:1    0    2G  0 lvm  [SWAP]
+  ├─RootVG-homeVol   253:2    0    1G  0 lvm  /home
+  ├─RootVG-varVol    253:3    0    2G  0 lvm  /var
+  ├─RootVG-varTmpVol 253:4    0    2G  0 lvm  /var/tmp
+  ├─RootVG-logVol    253:5    0    2G  0 lvm  /var/log
+  └─RootVG-auditVol  253:6    0  4.4G  0 lvm  /var/log/audit
+
+growpart xvda(name of the volume) 4(partion under which the /home directory is present(xvda4)) - this is saying like we are increasing the partion 4 to the system.
+
+df -Th
+Filesystem                   Type      Size  Used Avail Use% Mounted on
+devtmpfs                     devtmpfs  4.0M     0  4.0M   0% /dev
+tmpfs                        tmpfs     377M     0  377M   0% /dev/shm
+tmpfs                        tmpfs     151M  2.5M  149M   2% /run
+/dev/mapper/RootVG-rootVol   xfs       6.0G  2.3G  3.8G  38% /
+tmpfs                        tmpfs     377M     0  377M   0% /tmp
+/dev/mapper/RootVG-homeVol   xfs       960M  520M  441M  55% /home
+/dev/mapper/RootVG-varVol    xfs       2.0G  369M  1.6G  19% /var
+/dev/mapper/RootVG-logVol    xfs       2.0G   74M  1.9G   4% /var/log
+/dev/mapper/RootVG-varTmpVol xfs       2.0G   47M  1.9G   3% /var/tmp
+/dev/xvda3                   xfs       424M  223M  202M  53% /boot
+/dev/mapper/RootVG-auditVol  xfs       4.4G   64M  4.3G   2% /var/log/audit
+/dev/xvda2                   vfat      122M  7.0M  115M   6% /boot/efi
+tmpfs                        tmpfs      76M     0   76M   0% /run/user/1001
+
+lvextend -r -L +6G /dev/mapper/RootVG-homeVol (this is where the /home is present in the disk) (this is us increasing the /home directory to 7GB)
+
+
+
+
+
