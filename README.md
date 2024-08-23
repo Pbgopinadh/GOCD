@@ -110,3 +110,7 @@ what is GITOPS?
 writing everything in the form of code is GTIOPS why code and not GUI. if someone makes anychanges in GUI nobody knows. But if its as code we can understand the sequence, characterstics and behaviour, logic have changed history of file etc.
 
 GitOps: using git for deployment of infrastructure and application.
+
+How to assing a slave to the master
+
+the installation is same for both
