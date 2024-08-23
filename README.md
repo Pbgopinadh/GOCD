@@ -87,7 +87,26 @@ tmpfs                        tmpfs      76M     0   76M   0% /run/user/1001
 
 lvextend -r -L +6G /dev/mapper/RootVG-homeVol (this is where the /home is present in the disk) (this is us increasing the /home directory to 7GB)
 
+But i took different approcah. i have already spawned the VM with 20GB and later added 10GB of data. so i have followed the below to add 6B to the /home directory
+
+please check this URL for the steps taken - https://chatgpt.com/share/67ef4cbe-ba18-4df4-b516-445ce137503a
+
+The backticks (`) are a feature in Unix-like shell environments (such as bash) used for command substitution. Command substitution allows you to execute a command and use its output as part of another command. Here’s a detailed explanation:
 
 
+how to know the volume group is using this command sudo vgs
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GOCD terminology:
+
+Material: source repo
+
+What is a pipeline?
 
 
+what is GITOPS?
+
+writing everything in the form of code is GTIOPS why code and not GUI. if someone makes anychanges in GUI nobody knows. But if its as code we can understand the sequence, characterstics and behaviour, logic have changed history of file etc.
+
+GitOps: using git for deployment of infrastructure and application.
