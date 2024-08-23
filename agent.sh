@@ -30,6 +30,7 @@ stat $? "Unzipping GoCD zip file"
 chown -R gocd:gocd /home/gocd/go-agent-23.5.0  &>>/tmp/gocd-agent.log
 
 
+
 echo '
 [Unit]
 Description=GoCD Server
@@ -57,3 +58,6 @@ stat $? "Start GoCD Agent Service"
 
 echo -e "\n \n -> Open this file \e[1;33m/home/gocd/go-agent-23.5.0/wrapper-config/wrapper-properties.conf\e[0m & Update \e[1;33mwrapper.app.parameter.101\e[0m line and replace \e[1;31mlocalhost\e[0m with gocd server ip address and restart gocd-agent service"
 echo -e "To restart service \e[1;33msystemctl restart gocd-agent\e[0m"
+
+# after the above we have to change some paramters 
+# vim to this /home/gocd/go-agent-23.5.0/wrapper-config/wrapper-properties.conf and add the private IP of master to this parameter wrapper.app.parameter.101
