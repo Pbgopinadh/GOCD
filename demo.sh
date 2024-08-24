@@ -1,3 +1,4 @@
 echo "$(whoami) is installing ${Component} on ${ENV}"
-touch ${Component}.txt
+sudo su -
+touch /home/ec2-user/${Component}.txt
 ls -ltr
