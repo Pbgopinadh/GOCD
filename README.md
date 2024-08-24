@@ -120,3 +120,10 @@ the installation is same for both
 CI focuses on integrating code changes and ensuring they don’t break the build or existing functionality through automated testing.
 CD takes the next step by automatically deploying the successfully tested code to production, allowing for rapid and reliable delivery of software.
 
+shallow clone for quick clone of git -> by using the git clone --depth=1 gitURL
+
+The git clone --depth=1 <gitURL> command is used to create a shallow clone of a Git repository, where only the latest commit (the most recent snapshot of the repository) is retrieved. This command is particularly useful when you only need the most recent version of the code and want to minimize the amount of data transferred and storage used.
+
+by using this the git cloning will be fast.
+
+![alt text](image.png) ->  in the image we kept **/*.yaml for GOCD config part (GOCD will check all the repo folders and all the files that are ending with .yaml)
