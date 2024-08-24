@@ -1,1 +1,1 @@
-echo "$(whoami) is installing the ${COMPONENT} on ${ENV}"
+echo "$(whoami) is installing the ${Component} on ${ENV}"
