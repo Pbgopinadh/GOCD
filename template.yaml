@@ -1,0 +1,20 @@
+format_version: 10                # pipeline version from gocd, based on this options would vary 
+pipelines: 
+  myql:                                             # name of the pipeline job that will be showing on UI
+    group: App-Deployments
+    label_template: "${COUNT}"
+    materials:
+      mysql-code:
+        git: https://github.com/B58-CloudDevOps/ansible.git
+        branch: main
+        auto_update: true 
+        shallow_clone: true
+        display_order: -1
+        lock_behavior: none
+    secure_variables:
+        SSH_PSW: "AES:2OIP4os11Nz8gJ+jtzoUMg==:9RKApCuI7ST7rHEU5UsKuA=="        
+    environment_variables:                                                            # Pipeline Varaibles
+        COMPONENT: mysql
+    template: App-Deployment-Template
+
+# the above is how we use the template. but anyway the template is created via GUI as there is no plugin code for it.

@@ -11,6 +11,7 @@ pipelines:
         auto_update: true  # when ever there are any changes in git code the pipeline will be auto-updated.
         shallow_clone: true # this copy the repo and latest history
         branch: main
+# if we mention the variables here then they are called pipeline level variables and they are applicable to all the stages.
     stages:                                       
           - dev:                                        # Name of the stage 
               fetch_materials: true 
@@ -95,3 +96,5 @@ pipelines:
 # -X POST -d '{
 #   "value": "DevOps321"
 # }'
+
+# if there is a pattern then we can create a template for it. instead of writing the pattern multiple times.
