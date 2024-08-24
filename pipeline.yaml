@@ -24,9 +24,9 @@ pipelines:
                         arguments:
                         - -ltr
           - qa:
-              # approval:
-              #   # type: manual # this stage will only be trigerred when the previous stage is successful and there is manual approval to proceed.
-              #   # allow_only_on_success: true
+              # approval: # if this is removed upto allowonlyonsuccess then there will no manual in
+              #   type: manual # this stage will only be trigerred when the previous stage is successful and there is manual approval to proceed.
+              #   allow_only_on_success: true
               jobs:
                 Build:
                   tasks:
@@ -51,9 +51,9 @@ pipelines:
               fetch_materials: true 
               keep_artifacts: false
               clean_workspace: false 
-              # approval:
-              #   type: manual
-              #   allow_only_on_success: true
+              approval:
+                type: manual
+                allow_only_on_success: true
               jobs:
                 Build:
                   tasks:
