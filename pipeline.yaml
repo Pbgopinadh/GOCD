@@ -3,7 +3,7 @@ pipelines:
   mypipe1: # definition of mypipe1 pipeline
     group: dem0_pipeline # note that the group name can contain only of alphanumeric & underscore characters
     display_order: 10
-    label_template: "$(COUNT)"
+    label_template: "${COUNT}"
     locking: true #If a pipeline is locked then GoCD will not allow any other instance of that pipeline to be scheduled until the currently running one has been completed.
     materials: # material is the source repo of the pipe line
       mygit: # this is the name of material, the name can contain only of alphanumeric & underscore characters
