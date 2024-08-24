@@ -8,8 +8,8 @@ pipelines:
     materials: # material is the source repo of the pipe line
       mygit: # this is the name of material, the name can contain only of alphanumeric & underscore characters
         git: https://github.com/Pbgopinadh/GOCD.git # keyword git says about type of material and url at once
-        auto_update: true 
-        shallow_clone: true
+        auto_update: true  # when ever there are any changes in git code the pipeline will be auto-updated.
+        shallow_clone: true # this copy the repo and latest history
         branch: main
     stages:                                       
           - dev:                                        # Name of the stage 
@@ -24,20 +24,21 @@ pipelines:
                         arguments:
                         - -ltr
           - qa:
-              approval:
-                type: manual # this stage will only be trigerred when the previous stage is successful and there is manual approval to proceed.
-                allow_only_on_success: true
+              # approval:
+              #   # type: manual # this stage will only be trigerred when the previous stage is successful and there is manual approval to proceed.
+              #   # allow_only_on_success: true
               jobs:
                 Build:
                   tasks:
                     - exec:
+                        run_if: passed
                         command: ls 
                         arguments:
                         - -ltr
           - stage:
-              approval:
-                type: manual
-                allow_only_on_success: true
+              # approval:
+              #   type: manual
+              #   allow_only_on_success: true
               jobs:
                 Build:
                   tasks:
@@ -50,9 +51,9 @@ pipelines:
               fetch_materials: true 
               keep_artifacts: false
               clean_workspace: false 
-              approval:
-                type: manual
-                allow_only_on_success: true
+              # approval:
+              #   type: manual
+              #   allow_only_on_success: true
               jobs:
                 Build:
                   tasks:
