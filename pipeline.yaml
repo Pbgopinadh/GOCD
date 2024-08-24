@@ -17,7 +17,7 @@ pipelines:
               keep_artifacts: false
               clean_workspace: false
               jobs:
-                Build:
+                dev:
                   tasks:
                     - exec:
                         command: ls 
@@ -28,7 +28,7 @@ pipelines:
               #   type: manual # this stage will only be trigerred when the previous stage is successful and there is manual approval to proceed.
               #   allow_only_on_success: true
               jobs:
-                Build:
+                qa:
                   tasks:
                     - exec:
                         run_if: passed
@@ -40,7 +40,7 @@ pipelines:
               #   type: manual
               #   allow_only_on_success: true
               jobs:
-                Build:
+                stage:
                   tasks:
                     - exec:
                         command: ls 
@@ -55,7 +55,7 @@ pipelines:
                 type: manual
                 allow_only_on_success: true
               jobs:
-                Build:
+                prod:
                   tasks:
                     - exec:
                         command: ls 

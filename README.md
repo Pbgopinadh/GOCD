@@ -127,3 +127,5 @@ The git clone --depth=1 <gitURL> command is used to create a shallow clone of a 
 by using this the git cloning will be fast.
 
 ![alt text](image.png) ->  in the image we kept **/*.yaml for GOCD config part (GOCD will check all the repo folders and all the files that are ending with .yaml)
+
+https://chatgpt.com/share/a6723402-d6db-40ff-906f-4ab212a2a5d1 - see this for the explanation of the parameters of the pipeline
