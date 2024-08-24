@@ -20,9 +20,9 @@ pipelines:
                 Build:
                   tasks:
                     - exec:
-                        command: bash 
+                        command: ls 
                         arguments:
-                        - ls -ltr
+                        - -ltr
           - qa:
               approval:
                 type: manual # this stage will only be trigerred when the previous stage is successful and there is manual approval to proceed.
@@ -31,9 +31,9 @@ pipelines:
                 Build:
                   tasks:
                     - exec:
-                        command: bash 
+                        command: ls 
                         arguments:
-                        - ls -ltr
+                        - -ltr
           - stage:
               approval:
                 type: manual
@@ -42,9 +42,9 @@ pipelines:
                 Build:
                   tasks:
                     - exec:
-                        command: bash 
+                        command: ls 
                         arguments:
-                        - ls -ltr
+                        - -ltr
 
           - prod:
               fetch_materials: true 
@@ -57,6 +57,6 @@ pipelines:
                 Build:
                   tasks:
                     - exec:
-                        command: bash 
+                        ccommand: ls 
                         arguments:
-                        - ls -ltr
+                        - -ltr
