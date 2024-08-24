@@ -16,16 +16,23 @@ pipelines:
               fetch_materials: true 
               keep_artifacts: false
               clean_workspace: false
-              environment_variables:
+              environment_variables: # this is how we sent the paramters to the commands that we use.
                 ENV: dev
                 Component: sql
+              secure_varaibles:
+                passwd: AES:AVO1LEWU1XnYqZj5nby6WQ==:nLBkxHtPXd0u/TtHL4xm0g==
               jobs:
                 dev:
                   tasks:
                     - exec:
                         command: bash 
                         arguments:
-                        - demo.sh
+                        - demo.sh # see this file has the following written
+
+#  echo "$(whoami) is installing ${Component} on ${ENV}" component and env will be taken from the env variables.
+# sudo su -
+# touch /home/ec2-user/${Component}.txt
+# ls -ltr                     
           - qa: 
               environment_variables:
                 ENV: qa
@@ -73,3 +80,18 @@ pipelines:
                         command: bash 
                         arguments:
                         - demo.sh
+
+# curl 'https://ipadressoftheGoCDmaster:8153/go/api/admin/encrypt' \
+# -u 'username:password' \
+# -H 'Accept: application/vnd.go.cd.v1+json' \
+# -H 'Content-Type: application/json' \
+# -X POST -d '{
+#   "value": "value that we want to encrypt"
+# }'
+
+# curl 'http://172.31.5.113:8153/go/api/admin/encrypt' \
+# -H 'Accept: application/vnd.go.cd.v1+json' \
+# -H 'Content-Type: application/json' \
+# -X POST -d '{
+#   "value": "DevOps321"
+# }'
