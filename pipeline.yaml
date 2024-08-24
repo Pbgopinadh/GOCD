@@ -17,8 +17,8 @@ pipelines:
               keep_artifacts: false
               clean_workspace: false
               environment_variables:
-              ENV: dev
-              Component: sql
+                ENV: dev
+                Component: sql
               jobs:
                 dev:
                   tasks:
