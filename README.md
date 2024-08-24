@@ -111,6 +111,12 @@ writing everything in the form of code is GTIOPS why code and not GUI. if someon
 
 GitOps: using git for deployment of infrastructure and application.
 
-How to assing a slave to the master
+How to assing a slave to the master:
+ 
+Vim to this /home/gocd/go-agent-23.5.0/wrapper-config/wrapper-properties.conf in slave machine and add the private IP of master to this parameter wrapper.app.parameter.101 in the file.
 
 the installation is same for both
+
+CI focuses on integrating code changes and ensuring they don’t break the build or existing functionality through automated testing.
+CD takes the next step by automatically deploying the successfully tested code to production, allowing for rapid and reliable delivery of software.
+
