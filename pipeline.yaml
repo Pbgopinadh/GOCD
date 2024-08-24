@@ -4,7 +4,7 @@ pipelines:
     group: dem0_pipeline # note that the group name can contain only of alphanumeric & underscore characters
     display_order: 10
     label_template: "$(COUNT)"
-    lock_behavior: true #If a pipeline is locked then GoCD will not allow any other instance of that pipeline to be scheduled until the currently running one has been completed.
+    locking: true #If a pipeline is locked then GoCD will not allow any other instance of that pipeline to be scheduled until the currently running one has been completed.
     materials: # material is the source repo of the pipe line
       mygit: # this is the name of material, the name can contain only of alphanumeric & underscore characters
         git: https://github.com/Pbgopinadh/GOCD.git # keyword git says about type of material and url at once
