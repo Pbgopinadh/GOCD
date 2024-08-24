@@ -129,3 +129,37 @@ by using this the git cloning will be fast.
 ![alt text](image.png) ->  in the image we kept **/*.yaml for GOCD config part (GOCD will check all the repo folders and all the files that are ending with .yaml)
 
 https://chatgpt.com/share/a6723402-d6db-40ff-906f-4ab212a2a5d1 - see this for the explanation of the parameters of the pipeline
+
+For a devops engineer we have to make sure the pipeline doesnt have any errors. if there are we have to request the particular team to work on it.
+
+
+so how to run a ansilbe playbook in pipeline. instead of 
+
+giving like below:
+
+              fetch_materials: true 
+              keep_artifacts: false
+              clean_workspace: false
+              jobs:
+                dev:
+                  tasks:
+                    - exec:
+                        command: ansible-playbook 
+                        arguments:
+                        - --
+                        - --
+                        - --
+
+we can save the ansible playbook command in a bash file file.sh and call it in the pipeline
+
+              fetch_materials: true 
+              keep_artifacts: false
+              clean_workspace: false
+              jobs:
+                dev:
+                  tasks:
+                    - exec:
+                        command: bash 
+                        arguments:
+                        - file.sh file that contians the ansible-playbook command.
+
