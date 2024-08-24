@@ -1,0 +1,62 @@
+format_version: 10
+pipelines:
+  mypipe1: # definition of mypipe1 pipeline
+    group: dem0_pipeline # note that the group name can contain only of alphanumeric & underscore characters
+    display_order: 10
+    label_template: "$(COUNT)"
+    lock_behavior: true #If a pipeline is locked then GoCD will not allow any other instance of that pipeline to be scheduled until the currently running one has been completed.
+    materials: # material is the source repo of the pipe line
+      mygit: # this is the name of material, the name can contain only of alphanumeric & underscore characters
+        git: https://github.com/Pbgopinadh/GOCD.git # keyword git says about type of material and url at once
+        auto_update: true 
+        shallow_clone: true
+        branch: main
+    stages:                                       
+          - dev:                                        # Name of the stage 
+              fetch_materials: true 
+              keep_artifacts: false
+              clean_workspace: false
+              jobs:
+                Build:
+                  tasks:
+                    - exec:
+                        command: bash 
+                        arguments:
+                        - ls -ltr
+          - qa:
+              approval:
+                type: manual # this stage will only be trigerred when the previous stage is successful and there is manual approval to proceed.
+                allow_only_on_success: true
+              jobs:
+                Build:
+                  tasks:
+                    - exec:
+                        command: bash 
+                        arguments:
+                        - ls -ltr
+          - stage:
+              approval:
+                type: manual
+                allow_only_on_success: true
+              jobs:
+                Build:
+                  tasks:
+                    - exec:
+                        command: bash 
+                        arguments:
+                        - ls -ltr
+
+          - prod:
+              fetch_materials: true 
+              keep_artifacts: false
+              clean_workspace: false 
+              approval:
+                type: manual
+                allow_only_on_success: true
+              jobs:
+                Build:
+                  tasks:
+                    - exec:
+                        command: bash 
+                        arguments:
+                        - ls -ltr
