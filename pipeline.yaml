@@ -19,7 +19,7 @@ pipelines:
               environment_variables: # this is how we sent the paramters to the commands that we use.
                 ENV: dev
                 Component: sql
-              secure_varaibles:
+              secure_variables:
                 passwd: AES:AVO1LEWU1XnYqZj5nby6WQ==:nLBkxHtPXd0u/TtHL4xm0g==
               jobs:
                 dev:
